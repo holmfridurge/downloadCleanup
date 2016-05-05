@@ -1,10 +1,13 @@
 import os
 import re
+
 def compressstring(s):
         return re.sub('[(){}<>\-\.; ]', '', s)
+
 def reg(s):
 
-    g1 = re.search(r'(.*)([ \.]){1}(S|s|Season|season)(\d{1,2})(E|e|Episode|episode)(\d{1,2})[ .a-zA-Z]*',s)
+    regex = r'(.*)([ \.]){1}(S|s|Season|season)(\d{1,2})(E|e|Episode|episode)(\d{1,2})[ .a-zA-Z]*'
+    g1 = re.search(regex,s)
     name = g1.group(1)
     compressedname = compressstring(name)
 
