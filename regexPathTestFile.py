@@ -7,9 +7,8 @@ t2 = '''downloads/8 Out of 10 Cats - Season 7\\8 out of 10 cats S11 Uncut\\
     8 out of 10 cats S11 Uncut\\8 Out of 10 Cats S11E11 Best Bits WS PDTV [SKID].avi'''
 
 rending = '(\.avi$|\.mkv$\.rar$\.mp4$){1}'
-repisode = '(E|e|Episode|episode)(\d{1,2})'
-rseason = '(S|s|Season|season)(\d{1,2})'
-regex = r'(.*)([ -_\.]){1}' + rseason + repisode +'(.)*' + rending
+repseason = '(E|e|Episode|episode)(\d{1,2})(S|s|Season|season)(\d{1,2})'
+regex = r'(.*)([ -_\.]){1}' + repseason + '(.)*' + rending
 
 
 def compress(s):
@@ -27,5 +26,8 @@ def ff(direct,s):
     searchedorshows = [show for show in allshows if re.search(regex,show.split('\\')[-1]) != None
                      and compress(re.search(regex,show).group(1).split('\\')[-1]) == name]
     return searchedorshows
+
+#TESTS
+print(len(ff("downloads","8.Out.Of.10.Cats"))) #56
 
     
