@@ -1,0 +1,13 @@
+Fínpússa REGEX
+Prófa á download möppu að grípa ákveðinn file
+
+Skref 1
+ - Finna allar viðeigandi skrár (bara þættir með ákveðnu nafni)
+ - Setja þær í möppu
+ Skref 2
+ - Lesa season og setja þátt í  season möppu
+ Skref 3
+ - Bæta regex til að lesa fleiri tegundir af season 
+
+
+
