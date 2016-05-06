@@ -23,8 +23,8 @@ def compressseason(s):
 
 # TO DO: 
 # TO DO: Leyfa . bil _- a milli e og s
-# TO DO: gripa villu tegar thattur sem leitar er af er ekki til
-# TO D0: gripa villu thegar format ekki til i compressepseason og compressname
+# TO DO: numer a thattum
+
     
 def ff(direct,s):
 
@@ -46,7 +46,6 @@ def ff(direct,s):
 
     newnames = [compressname(re.search(regex,show).group(1).split('\\')[-1]) for show in sshows]
     newseasons = [compressseason(re.search(rseason,show).group(1).split('\\')[-1]) for show in sshows]
-    #newseasons = [compressseason(show) for show in seasons]
     endings = [re.search(rending,show).group(1).split('\\')[-1] for show in sshows]
     newshows = [name + "." + season + ending for name, season, ending in zip(newnames,newseasons,endings)]
 
