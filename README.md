@@ -1,4 +1,4 @@
-# description of how to run your script
+# Description of how to run your script
 
 # Example of how to run your script.
 

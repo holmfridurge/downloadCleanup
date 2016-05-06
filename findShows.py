@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 
 def compressname(s):
     return re.sub('[(){}<>\-\.; ]', '', s).lower()
@@ -15,11 +16,16 @@ def findshows(direct,s):
     name = compressname(s)
 
     allshows = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
-    sshows = [show.split('\\')[-1] for show in allshows if re.search(regex,show.split('\\')[-1]) != None
+    sshows = [show for show in allshows if re.search(regex,show.split('\\')[-1]) != None
                      and name in compressname(re.search(regex,show).group(1).split('\\')[-1])]
+    if not os.path.exists('Shows'):
+        os.makedirs('Shows')
 
+    for i in sshows:
+        shutil.move(i, 'Shows/'+i.split('\\')[-1])
+        print(i)
     # Returns a list containg the names of the shows that was searched for
-    return sshows
+    #return sshows
 
 #TESTS
 #print(len(findshows("downloads","8.Out.Of.10.Cats")) #Result: 69
