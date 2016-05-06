@@ -1,20 +1,21 @@
 import os
 import re
 import shutil
-def parse(direct,s):
+def parse(s, direct):
 
     #test = "bbs01e02.txt"
+    #regex = "(.*)s[0-9]+e[0-9]+(.*)"
     regex = s + "s[0-9]+e[0-9]+(.*)"
     #print(re.match(regex,test))
     # Walk through every folder and grab files that match regex
     files = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files
              if re.match(regex,file)]
-    n = files[0].split('\\')
-    if not os.path.exists('Submissions/Shows'):
-        os.makedirs('Submissions/Shows')
-    print(n[len(n)-1])
-    shutil.move(files[0], 'Submissions/Shows/'+n[len(n)-1])
-    #print(files[0][len(files)-1])
+    if not os.path.exists('~/Shows'):
+        os.makedirs('~/Shows')
+    for i in files:
+        n = i.split('\\')
+        shutil.move(i, 'Submissions/Shows/'+n[len(n)-1])
+        print(n)
     return files
 
     #readerobjs = [open(f, encoding="utf-8") for f in files]
