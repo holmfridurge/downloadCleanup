@@ -45,13 +45,14 @@ def findshows(direct,s = ''):
 
 def findmovies(direct):
     allfiles = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
-    #movie: is not an episode, video format, a year (1900-2099) or no number in name.
+    #movie: is not an episode, video format\srt, a year (1900-2099) or no number in name.
     movies = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) == None
               and re.search(rending,show.split('\\')[-1])
               and (re.search(ryear,show.split('\\')[-1])
                    or not re.search('(\d{1})',show.split('\\')[-1]))]
     return zip(movies)
 
-def getAllFiles(direct):
-    allFiles = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
-    return allFiles
+
+   
+
+
