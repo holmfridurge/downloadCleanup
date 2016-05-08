@@ -34,8 +34,9 @@ def findshows(direct,s):
     endings = [re.search(rending,show).group(1).split('\\')[-1] for show in sshows]
     newshows = [name + "." + season + ending for name, season, ending in zip(newnames,newseasons,endings)]
 
-
+    returnShows = list(zip(sshows,newshows))
+    return returnShows
     # Returns a list containg the names of the shows that was searched for and compressed filenames
-    return [sshows,newshows]
+   # return [sshows,newshows]
 
 
