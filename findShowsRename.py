@@ -14,9 +14,9 @@ def compressname(s):
     return re.sub('[\[\](){}<>\+\-\.\_; ]', '', s).lower()
 
 def compressseason(s):
-    if re.search(rseason1,s):
+    if re.search(rseason1,s):       
         return 's' + re.search(rseason1,s).group(3).lstrip('0') + 'e' + re.search(rseason1,s).group(7).lstrip('0')
-    elif re.search(rseason2,s):
+    elif re.search(rseason2,s):       
         return 's' + re.search(rseason2,s).group(2).strip('0') + 'e' + re.search(rseason2,s).group(4).lstrip('0')
     else:
         #can not evaluate season/eiposde number, use original string.
@@ -26,20 +26,22 @@ def findshows(direct,s = ''):
     allfiles = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
     if s == '':
         #full path of all shows
-        sshows = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None]
+        fullpaths = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None]
     else:
         name = compressname(s)
         #full path of shows that have name which include the searched string
-        sshows = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None
+        fullpaths = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None
                      and name in compressname(re.search(regex,show).group(1).split('\\')[-1])]
 
+    shortpaths = [show.split('\\')[-1] for show in fullpaths]
+
     #build new names for files
-    newnames = [compressname(re.search(regex,show).group(1).split('\\')[-1]) for show in sshows]
-    newseasons = [compressseason(re.search(rseason,show).group(1).split('\\')[-1]) for show in sshows]
-    endings = [re.search(rending,show).group(1).split('\\')[-1] for show in sshows]
+    newnames = [compressname(re.search(regex,show).group(1).split('\\')[-1]) for show in shortpaths]
+    newseasons = [compressseason(re.search(rseason,show).group(1).split('\\')[-1]) for show in shortpaths]
+    endings = [re.search(rending,show).group(1).split('\\')[-1] for show in shortpaths]
     newshows = [name + "." + season + ending for name, season, ending in zip(newnames,newseasons,endings)]
-    
-    return zip(sshows,newshows)
+
+    return zip(fullpaths,newshows)
 
 def findmovies(direct):
     allfiles = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
