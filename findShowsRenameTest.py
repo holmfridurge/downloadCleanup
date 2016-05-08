@@ -7,7 +7,7 @@ import re
 rseason1 = '(S|s|Season|season)([ \-\_\.]*)(\d{1,2})([ \-\_\.]*)(E|e|Episode|episode)([ \-\_\.]*)(\d{1,2})'
 rseason2 = '(\[)*(\d{1,2})([.xX-_])(\d{1,2})(\])*'
 rseason3 = '(([-_\[#]+)(\d{1,3})(\]*))'
-rending = '((\.avi|\.mkv|\.mp4|\.rar){1})'
+rending = '((\.avi|\.mkv|\.mp4|\.rar|\.srt){1})'
 rseason = '(((S|s|Season|season)([ \-\_\.]*)(\d{1,2})([ \-\_\.]*)(E|e|Episode|episode)([ \-\_\.]*)(\d{1,2}))|((\[)(\d{1,2})([.xX-_])(\d{1,2})(\]))|(([-_#\[]+)(\d{1,3})(\])*))'
 
 
@@ -16,13 +16,11 @@ def compressname(s):
 
 def compressseason(s):
     if re.search(rseason1,s):
-        print(s)
-        return "s" + re.search(rseason1,s).group(3).lstrip('0') + "e" + re.search(rseason1,s).group(7).lstrip('0')
+        return 's' + re.search(rseason1,s).group(3).lstrip('0') + 'e' + re.search(rseason1,s).group(7).lstrip('0')
     elif re.search(rseason2,s):
-        #print(s)
-        return "s" + re.search(rseason2,s).group(2).strip('0') + "e" + re.search(rseason2,s).group(4).lstrip('0')
+        return 's' + re.search(rseason2,s).group(2).strip('0') + 'e' + re.search(rseason2,s).group(4).lstrip('0')
     else:
-        return  "sx" + s[1:]
+        return  'sx' + s[1:].lstrip('0')
 
 def findshows(direct,s):
 
