@@ -2,7 +2,7 @@ import os
 import re
 
 #different groups for compressing
-#global so we wan use across files and functions
+#global so we can use across files and functions
 rseason1 = '(S|s|Season|season)([ \-\_\.]*)(\d{1,2})([ \-\_\.]*)(E|e|Episode|episode)([ \-\_\.]*)(\d{1,2})'
 rseason2 = '(\[)*(\d{1,2})([.xX-_])(\d{1,2})(\])*'
 rseason3 = '(([-_\[#]+)(\d{1,3})(\]*))'
