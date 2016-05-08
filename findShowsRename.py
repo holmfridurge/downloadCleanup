@@ -41,4 +41,7 @@ def findshows(direct,s = ''):
     return zip(sshows,newshows)    
    
 
+def getAllFiles(direct):
+    allshows = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
+    return allshows
 
