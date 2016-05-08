@@ -1,36 +1,30 @@
-import os
-import re
-import shutil
+import os, re, shutil
+import findShowsRename as fsr
 
-def compressname(s):
-    return re.sub('[(){}<>\-\.; ]', '', s).lower()
-
-def findshows(direct,s):
-
-    rseason = '(((S|s|Season|season)(\d{1,2})(E|e|Episode|episode)(\d{1,2}))|((\[)(\d{1,2})([.xX-_])(\d{1,2})(\])))'
-    rending = '((\.avi|\.mkv|\.mp4|\.rar){1})'
-    regex = '(.+)(([ -_\.]){0,1})' + rseason + '(.*)' + rending
-    #regexlong = '(.+)(([ -_\.]){0,1})(((S|s|Season|season)(\d{1,2})(E|e|Episode|episode)(\d{1,2}))|((\[)(\d{1,2})([.xX-_])(\d{1,2})(\])))(.*)((\.avi|\.mkv|\.mp4|\.rar){1})'
-    
-    name = compressname(s)
-
-    allshows = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
-    
-    sshows = [show for show in allshows if re.search(regex,show.split('\\')[-1]) != None
-                     and name in compressname(re.search(regex,show).group(1).split('\\')[-1])]
-    
-    if not os.path.exists('Shows'):
-        os.makedirs('Shows')
-
+def moveFiles(direct,s):
+    rseason1 = fsr.rseason1
+    sshows = fsr.findshows(direct,s)
     for i in sshows:
-        shutil.move(i, 'Shows/'+i.split('\\')[-1])
-        print(i)
-    # Returns a list containg the names of the shows that was searched for
-    return findmovies(direct, s)
+        season = getSeason(i[1])
+        sname = getName(i[1])
+        dirName = 'Shows/'+sname+'/'+season+'/'
+        if not os.path.exists(dirName):
+            os.makedirs(dirName)
+        shutil.move(i[0], dirName+i[1])
+        print(dirName)
 
-def findmovies(direct, s):
-    print('yay')
-    
+def getSeason(s):
+    rseason = fsr.rseason1
+    b = fsr.compressseason(s)
+    b = re.search(rseason,b).group(2)
+    b = b.lstrip('0')
+    return 'Season '+b
+
+def getName(s):
+    c = s.split('.')
+    return c[0]
+
+
 #TESTS
 #print(len(findshows("downloads","8.Out.Of.10.Cats")) #Result: 69
 #print(len(findshows("downloads","30 Rock"))) #Result: 61
