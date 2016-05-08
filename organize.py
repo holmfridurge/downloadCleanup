@@ -1,7 +1,6 @@
-import findShows as fs
+import moveFiles as mf
 import removeDir as rd
 def organize(direct, s = ''):
-    fs.moveShows(direct, s)
-    fs.moveMovies(direct, s)
+    mf.moveShows(direct, s)
+    mf.moveMovies(direct, s)
     rd.remove(direct)
-    return 'finito'
