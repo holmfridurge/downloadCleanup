@@ -39,4 +39,7 @@ def findshows(direct,s):
     # Returns a list containg the names of the shows that was searched for and compressed filenames
    # return [sshows,newshows]
 
+def getAllFiles(direct):
+    allshows = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
+    return allshows
 

@@ -1,7 +1,8 @@
 import os, re, shutil
 import findShowsRename as fsr
+import removeDirTestFile as rdtf
 
-def moveFiles(direct,s):
+def moveShows(direct,s):
     rseason1 = fsr.rseason1
     sshows = fsr.findshows(direct,s)
     for i in sshows:
@@ -11,7 +12,8 @@ def moveFiles(direct,s):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
         shutil.move(i[0], dirName+i[1])
-        print(dirName)
+    rdtf.remove()
+
 
 def getSeason(s):
     rseason = fsr.rseason1
@@ -23,8 +25,7 @@ def getSeason(s):
 def getName(s):
     c = s.split('.')
     return c[0]
-
-
+    
 #TESTS
 #print(len(findshows("downloads","8.Out.Of.10.Cats")) #Result: 69
 #print(len(findshows("downloads","30 Rock"))) #Result: 61
