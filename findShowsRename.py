@@ -48,6 +48,6 @@ def findmovies(direct):
               and re.search(ryear,show.split('\\')[-1])]
     return zip(movies)
 
-   
-
-
+def getAllFiles(direct):
+    allFiles = [os.path.join(root,file) for root,_,files in os.walk(direct) for file in files]
+    return allFiles
