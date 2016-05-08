@@ -3,12 +3,6 @@ import findShowsRename as fsr
 
 rending = '((\.avi|\.mkv|\.mp4|\.rar){1})'
 
-def tester():
-    filename, file_extension = os.path.splitext()
-    print('filename: '+filename)
-    print('file_ext: '+file_extension)
-
-
 def remove():
     allFiles = fsr.getAllFiles('testSub')
     for f in allFiles:
