@@ -27,7 +27,7 @@ def findshows(direct,s = ''):
         sshows = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None]
     else:
         name = compressname(s)
-        sshows = [show for show in allshows if re.search(regex,show.split('\\')[-1]) != None
+        sshows = [show for show in allfiles if re.search(regex,show.split('\\')[-1]) != None
                      and name in compressname(re.search(regex,show).group(1).split('\\')[-1])]
     
 
