@@ -3,3 +3,4 @@ todo.txt
 submissions/**
 downloads.zip/
 Shows/
+__pycache__/
