@@ -12,6 +12,7 @@ def moveShows(direct,s=''):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
         #move the file and rename it
+        #if not os.path.isfile(i[1]):
         shutil.move(i[0], dirName+i[1])
 
 #get season number
@@ -37,7 +38,8 @@ def moveMovies(direct,s=''):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
         #move the file to Movies directory
-        shutil.move(i[0], dirName)
+        if not os.path.isfile(i[0]):
+            shutil.move(i[0], dirName)
 #TESTS
 #print(len(findshows("downloads","8.Out.Of.10.Cats")) #Result: 69
 #print(len(findshows("downloads","30 Rock"))) #Result: 61
