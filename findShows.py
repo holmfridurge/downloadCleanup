@@ -1,10 +1,14 @@
 import os, re, shutil
 import findShowsRename as fsr
-import removeDirTestFile as rdtf
 
-def moveShows(direct,s):
+def tester(d):
+    sshows = list(fsr.findshows(d))
+    for i in sshows:
+        print(i)
+
+def moveShows(direct,s=''):
     rseason1 = fsr.rseason1
-    sshows = fsr.findshows(direct,s)
+    sshows = list(fsr.findshows(direct))
     for i in sshows:
         season = getSeason(i[1])
         sname = getName(i[1])
@@ -12,20 +16,25 @@ def moveShows(direct,s):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
         shutil.move(i[0], dirName+i[1])
-    rdtf.remove()
-
-
+    
 def getSeason(s):
-    rseason = fsr.rseason1
+    rseason = '(s)(\d{1,2})(e)(\d{1,2})'
     b = fsr.compressseason(s)
-    b = re.search(rseason,b).group(2)
-    b = b.lstrip('0')
-    return 'Season '+b
+    if re.search(rseason,b):
+        b = re.search(rseason,b).group(2)
+    return 'Season '+ b
 
 def getName(s):
     c = s.split('.')
     return c[0]
-    
+
+def moveMovies(direct,s=''):
+    smovies = list(fsr.findmovies(direct))
+    for i in smovies:
+        dirName = 'Movies/'
+        if not os.path.exists(dirName):
+            os.makedirs(dirName)
+        shutil.move(i[0], dirName)
 #TESTS
 #print(len(findshows("downloads","8.Out.Of.10.Cats")) #Result: 69
 #print(len(findshows("downloads","30 Rock"))) #Result: 61
