@@ -1,5 +1,5 @@
 import os, re, shutil
-import findShowsRename as fsr
+import searchFiles as fsr
 
 #move all tv shows to a folder named Shows and subdirectories after the season number
 def moveShows(direct,s=''):
